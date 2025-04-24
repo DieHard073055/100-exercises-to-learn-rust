@@ -17,8 +17,27 @@ impl Ticket {
     // You'll have to use what you learned in the previous exercises,
     // as well as some `String` methods. Use the documentation of Rust's standard library
     // to find the most appropriate options -> https://doc.rust-lang.org/std/string/struct.String.html
+    fn validate(title: &str, description: &str, status: &str){
+        // validate title
+        if title.len() < 1 {
+            panic!("Title cannot be empty");
+        }
+        if description.len() < 1 {
+            panic!("Description cannot be empty");
+        }
+        if title.len() > 50 {
+            panic!("Title cannot be longer than 50 bytes");
+        }
+        if description.len() > 500 {
+            panic!("Description cannot be longer than 500 bytes");
+        }
+        match status {
+            "To-Do" | "In Progress" | "Done" => {},
+            _ => panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed")
+        }
+    }
     fn new(title: String, description: String, status: String) -> Self {
-        todo!();
+        Ticket::validate(title.as_str(), description.as_str(), status.as_str());
         Self {
             title,
             description,
